@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Violation Detection Results</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>Traffic Violation Detection Results</h1>
+        
+        <div class="results-section">
+            <div class="report-actions">
+                <h2>Violation Report</h2>
+                <a href="{{ url_for('download_report', report=report) }}" class="btn download-btn">Download PDF Report</a>
+                <a href="{{ url_for('index') }}" class="btn">Process Another Video</a>
+            </div>
+            
+            <div class="evidence-section">
+                <h2>Evidence Images</h2>
+                <div class="evidence-gallery">
+                    {% for file in evidence_files %}
+                        <div class="evidence-item">
+                            <img src="{{ url_for('static', filename='processed/' + folder + '/' + file) }}" alt="Violation evidence">
+                            <p>{{ file }}</p>
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

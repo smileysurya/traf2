@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Traffic Violation Detection</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>Traffic Violation Detection System</h1>
+        
+        <div class="upload-form">
+            <h2>Upload Traffic Video</h2>
+            {% with messages = get_flashed_messages() %}
+                {% if messages %}
+                    <div class="alert">
+                        {{ messages[0] }}
+                    </div>
+                {% endif %}
+            {% endwith %}
+            
+            <form action="{{ url_for('upload_file') }}" method="post" enctype="multipart/form-data">
+                <div class="form-group">
+                    <label for="video">Select Video File:</label>
+                    <input type="file" id="video" name="video" accept=".mp4,.avi,.mov,.mkv" required>
+                </div>
+                
+                <div class="form-group">
+                    <button type="submit" class="btn">Upload & Process</button>
+                </div>
+            </form>
+        </div>
+        
+        <div class="info-box">
+            <h3>Supported Violations</h3>
+            <ul>
+                <li>Speed Violations</li>
+                <li>Red Light Violations</li>
+                <li>Lane Discipline Violations</li>
+                <li>Illegal Stopping</li>
+            </ul>
+            
+            <h3>Instructions</h3>
+            <ol>
+                <li>Upload a traffic video file (MP4, AVI, MOV, MKV)</li>
+                <li>Wait for the system to process the video</li>
+                <li>View detected violations and download the PDF report</li>
+            </ol>
+        </div>
+    </div>
+    
+    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+</body>
+</html>
